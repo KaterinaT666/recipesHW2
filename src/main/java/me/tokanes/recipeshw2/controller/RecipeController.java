@@ -2,6 +2,7 @@ package me.tokanes.recipeshw2.controller;
 
 import me.tokanes.recipeshw2.model.Recipe;
 import me.tokanes.recipeshw2.service.RecipeService;
+import me.tokanes.recipeshw2.service.ValidateService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,16 +13,22 @@ import java.util.Map;
 public class RecipeController {
 
 	private final RecipeService recipeService;
+	private final ValidateService validateService;
 
 
-	public RecipeController(RecipeService recipeService) {
+	public RecipeController(RecipeService recipeService,
+							ValidateService validateService) {
 
 		this.recipeService = recipeService;
+		this.validateService = validateService;
 	}
 
 	@PostMapping
-	public Recipe add(@RequestBody Recipe recipe){
-		return recipeService.add(recipe);
+	public ResponseEntity<Recipe> add(@RequestBody Recipe recipe){
+		if (validateService.isNotValid(recipe)){
+			return ResponseEntity.badRequest().build();
+		}
+		return ResponseEntity.ok(recipeService.add(recipe));
 	}
 
 	@GetMapping("/{id}")
@@ -32,6 +39,9 @@ public class RecipeController {
 	@PutMapping("/{id}")
 	public ResponseEntity <Recipe> update(@PathVariable long id,
 											  @RequestBody Recipe recipe){
+		if (validateService.isNotValid(recipe)){
+			return ResponseEntity.badRequest().build();
+		}
 		return ResponseEntity.of(recipeService.update(id, recipe));
 	}
 
