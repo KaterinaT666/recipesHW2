@@ -1,0 +1,23 @@
+POST http://localhost:8080/recipe
+Content-Type: application/json
+
+{
+  "title": "Сырники с творогом",
+  "cookingTime": 5,
+  "ingredients": [
+    {
+      "title": "творог",
+      "amount": 300,
+      "measureUnit": "гр."
+    }
+  ],
+  "steps": [
+    "1",
+    "2",
+    "3"
+  ]
+}
+###
+GET http://localhost:8080/recipe/5
+###
+GET http://localhost:8080/info
