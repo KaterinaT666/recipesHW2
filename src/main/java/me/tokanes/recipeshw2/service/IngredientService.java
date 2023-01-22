@@ -2,7 +2,6 @@ package me.tokanes.recipeshw2.service;
 
 import me.tokanes.recipeshw2.model.Ingredient;
 import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -12,6 +11,7 @@ public class IngredientService {
 
 	private final Map<Long, Ingredient> ingredients = new HashMap<>();
 	private long idGenerator =1;
+
 
 	public Ingredient add(Ingredient ingredient){
 		ingredients.put(idGenerator++, ingredient);

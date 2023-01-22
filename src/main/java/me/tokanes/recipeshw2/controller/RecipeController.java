@@ -25,7 +25,7 @@ public class RecipeController {
 
 	@PostMapping
 	public ResponseEntity<Recipe> add(@RequestBody Recipe recipe){
-		if (validateService.isNotValid(recipe)){
+		if (!validateService.isNotValid(recipe)){
 			return ResponseEntity.badRequest().build();
 		}
 		return ResponseEntity.ok(recipeService.add(recipe));
@@ -33,6 +33,7 @@ public class RecipeController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Recipe> get(@PathVariable long id){
+
 		return ResponseEntity.of(recipeService.get(id));
 	}
 
@@ -47,6 +48,7 @@ public class RecipeController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity <Recipe> delete(@PathVariable long id){
+
 		return ResponseEntity.of(recipeService.delete(id));
 	}
 

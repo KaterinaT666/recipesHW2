@@ -36,7 +36,7 @@ public class IngredientController {
 	})
 	@PostMapping
 	public ResponseEntity <Ingredient> add(@RequestBody Ingredient ingredient){
-		if (validateService.isNotValid(ingredient)){
+		if (!validateService.isNotValid(ingredient)){
 			return ResponseEntity.badRequest().build();
 		}
 		return ResponseEntity.ok(ingredientService.add(ingredient));
