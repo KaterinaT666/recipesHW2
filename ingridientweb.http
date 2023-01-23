@@ -1,0 +1,26 @@
+POST http://localhost:8080/ingredient
+Content-Type: application/json
+
+{
+  "title": "творог",
+  "amount": 300,
+  "measureUnit": "гр."
+}
+###
+GET http://localhost:8080/ingredient
+
+###
+GET http://localhost:8080/ingredient/1
+
+###
+PUT http://localhost:8080/ingredient/1
+Content-Type: application/json
+
+{
+  "title": "яйца",
+  "amount": 2,
+  "measureUnit": "шт."
+}
+
+###
+DELETE http://localhost:8080/ingredient/1
