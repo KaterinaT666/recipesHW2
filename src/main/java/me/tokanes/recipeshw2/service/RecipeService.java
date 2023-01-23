@@ -2,13 +2,11 @@ package me.tokanes.recipeshw2.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import me.tokanes.recipeshw2.model.Ingredient;
 import me.tokanes.recipeshw2.model.Recipe;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -71,4 +69,11 @@ public class RecipeService {
 		}
 	}
 
+	public byte[] download() {
+		StringBuilder stringBuilder = new StringBuilder();
+		for (Recipe recipe: recipes.values()){
+			stringBuilder.append(recipe).append("\n").append("∸ ∸ ∸ ∸ ∸ ∸ ∸ ∸ ∸ ∸ ∸ ∸ ∸ ∸ ∸ ").append("\n");
+		}
+		return stringBuilder.toString().getBytes(StandardCharsets.UTF_8);
+	}
 }

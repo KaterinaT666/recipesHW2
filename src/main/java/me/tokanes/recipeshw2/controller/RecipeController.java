@@ -3,6 +3,8 @@ package me.tokanes.recipeshw2.controller;
 import me.tokanes.recipeshw2.model.Recipe;
 import me.tokanes.recipeshw2.service.RecipeService;
 import me.tokanes.recipeshw2.service.ValidateService;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,5 +57,18 @@ public class RecipeController {
 	@GetMapping
 	public Map<Long, Recipe> getAll(){
 		return recipeService.getAll();
+	}
+
+	@GetMapping("/download")
+	public ResponseEntity<byte[]> download(){
+		byte[] data = recipeService.download();
+		if (data == null){
+			return ResponseEntity.badRequest().build();
+		}
+		return ResponseEntity.ok()
+				.contentLength(data.length)
+				.contentType(MediaType.TEXT_PLAIN)
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename =\"recipes.txt\"")
+				.body(data);
 	}
 }

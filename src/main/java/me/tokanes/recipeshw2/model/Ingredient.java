@@ -1,8 +1,6 @@
 package me.tokanes.recipeshw2.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
@@ -14,5 +12,8 @@ public class Ingredient {
 	private int amount;
 	private String measureUnit;
 
-
+	@Override
+	public String toString() {
+		return title+ " ─ "+ amount+" "+measureUnit;
+	}
 }
